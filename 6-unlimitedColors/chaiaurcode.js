@@ -4,12 +4,26 @@ const randomColor = function(){
   for(let i = 0 ; i < 6 ; i++){
     color += hex[Math.floor(Math.random()*16)];
   }
-  console.log(color);
+  return color;
 }
 const start = document.querySelector('#start');
 const stop = document.querySelector('#stop');
-const body =
+const body = document.querySelector('body');
 
-start.addEventListener('click',function(){
-randomColor();
-})
+let intervalID;
+
+const startChangingColor = function(){
+  intervalID = setInterval(changebg ,100);
+   function changebg(){
+    body.style.backgroundColor = randomColor();
+  }
+};
+const stopChangingColor = function(){
+  clearInterval(intervalID);
+};
+
+ 
+
+start.addEventListener('click',startChangingColor);
+stop.addEventListener('click',stopChangingColor);
+
