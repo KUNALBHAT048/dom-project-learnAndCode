@@ -10,20 +10,27 @@ const start = document.querySelector('#start');
 const stop = document.querySelector('#stop');
 const body = document.querySelector('body');
 
+let startval = false;
 let intervalID;
 
 const startChangingColor = function(){
-  intervalID = setInterval(changebg ,100);
-   function changebg(){
+  if(!intervalID && !startval){
+    startval = true;
+  intervalID = setInterval(changebg ,1000);}
+
+  function changebg(){
     body.style.backgroundColor = randomColor();
   }
 };
 const stopChangingColor = function(){
+  if(startval){
   clearInterval(intervalID);
+  intervalID = null;
+  startval = false
+  }
 };
 
  
-
 start.addEventListener('click',startChangingColor);
 stop.addEventListener('click',stopChangingColor);
 
